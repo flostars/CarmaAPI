@@ -52,6 +52,9 @@ public class OutPutController {
     @GetMapping(path = "/datahtml")
     public Object html(@RequestParam(value = "token") String token, @RequestParam(value = "type") String type) {
         CarmaModel carmaModelByToken = carmaModelService.getCarmaModelByToken(token);
+        if(carmaModelByToken==null){
+            return "<no token data present>";
+        }
         String path = System.getProperty("user.dir") + File.separator + "htmlTemplates" + File.separator + "page3.html";
         if (type == null) {
 
