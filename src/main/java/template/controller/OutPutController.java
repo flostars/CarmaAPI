@@ -6,7 +6,10 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import template.model.CarmaModel;
 import template.service.CarmaModelService;
+import template.service.FileTool;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Collections;
 import java.util.Map;
 
@@ -47,10 +50,34 @@ public class OutPutController {
     }
 
     @GetMapping(path = "/datahtml")
-    public Object html(@RequestParam(value = "token") String token) {
+    public Object html(@RequestParam(value = "token") String token, @RequestParam(value = "type") String type) {
         CarmaModel carmaModelByToken = carmaModelService.getCarmaModelByToken(token);
+        String path = System.getProperty("user.dir") + File.separator + "htmlTemplates" + File.separator + "page3.html";
+        if (type == null) {
 
-        return carmaModelByToken;
+        } else if (type.equals("1")) {
+            path = System.getProperty("user.dir") + File.separator + "htmlTemplates" + File.separator + "page3.html";
+        } else if (type.equals("2")) {
+            path = System.getProperty("user.dir") + File.separator + "htmlTemplates" + File.separator + "page3Black.html";
+        } else if (type.equals("3")) {
+            path = System.getProperty("user.dir") + File.separator + "htmlTemplates" + File.separator + "page5.html";
+        } else if (type.equals("4")) {
+            path = System.getProperty("user.dir") + File.separator + "htmlTemplates" + File.separator + "page5Black.html";
+        }
+
+        String s = "";
+        try {
+            s = FileTool.readFile(path);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        s = s.replaceAll("<PlantedTreesUK>", String.valueOf(carmaModelByToken.getPlantedTreesUK()))
+                .replaceAll("<WorkdaysCreated>", String.valueOf(carmaModelByToken.getWorkdaysCreated()))
+                .replaceAll("<CarbonOffsetCo2>", String.valueOf(carmaModelByToken.getCarbonOffsetCo2()))
+                .replaceAll("<GoldStandardCo2>", String.valueOf(carmaModelByToken.getGoldStandardCo2Purchased()))
+                .replaceAll("<PlantedTreesOffShore>", String.valueOf(carmaModelByToken.getPlantedTreesOffShore()))
+                .replaceAll("<Total>", String.valueOf((carmaModelByToken.getPlantedTreesOffShore()+carmaModelByToken.getPlantedTreesUK())));
+        return s;
     }
 
 

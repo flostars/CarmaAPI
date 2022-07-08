@@ -1,0 +1,96 @@
+<html lang="en">
+<head>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: black;
+
+        }
+
+        .banner {
+            font-family: 'Lato', sans-serif;
+            color: #255728;
+            padding: 1rem 1rem 4rem;
+            margin: 0;
+        }
+
+        .powered-by {
+            margin: auto;
+            text-align: center;
+            padding-bottom: 3rem;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .stats {
+            display:flex;
+            gap: 20px;
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-items: flex-start;
+        }
+
+        .stats .stat-item {
+            flex-grow: 1;
+            padding: 1rem;
+            text-align: center;
+            color: white;
+        }
+
+        .stats .stat-item .stat-header, .stats .stat-item .stat-description {
+            display: block;
+        }
+
+        .stats .stat-item .stat-header {
+            font-size: 2rem;
+            line-height: 3.5rem;
+            font-weight: 700;
+        }
+
+        .stats .stat-item .stat-description {
+            text-transform: uppercase;
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 1000px) {
+            .stats {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <title>Stats</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="banner">
+    <div class="powered-by">
+        powered by carma.earth
+    </div>
+    <div class="stats">
+        <div class="stat-item">
+            <span class="stat-header"><Total></span>
+            <span class="stat-description">trees planted</span>
+        </div>
+
+        <div class="stat-item">
+            <span class="stat-header"><CarbonOffsetCo2> tonnes</span>
+            <span class="stat-description">of CO2 removed</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-header"><WorkdaysCreated></span>
+            <span class="stat-description">workdays created</span>
+        </div>
+    </div>
+</div>
+</body>
+</html>
